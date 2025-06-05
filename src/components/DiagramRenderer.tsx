@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import mermaid from 'mermaid';
+import mermaid from 'mermaid/dist/mermaid.esm.mjs';
 
 interface Props {
   definition: string;
