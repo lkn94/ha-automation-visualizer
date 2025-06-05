@@ -22,8 +22,16 @@ export default function AutomationViewer({ info, onBack }: Props) {
 
   return (
     <div className="space-y-4">
-      <button onClick={onBack} className="underline text-yellow-400 hover:text-yellow-300">Zurück</button>
-      <h2 className="text-xl font-bold">{info.title}</h2>
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={onBack}
+          className="text-yellow-400 hover:text-yellow-300"
+          aria-label="Zurück"
+        >
+          &larr;
+        </button>
+        <h2 className="text-xl font-bold">{info.title}</h2>
+      </div>
       {(info.description || info.affiliate) && (
         <div className="md:flex md:items-center md:justify-between">
           {info.description && (
