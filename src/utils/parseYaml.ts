@@ -21,21 +21,19 @@ export function automationToMermaid(a: Automation): string {
 
   lines.push('start([Start])');
   if (t.length) {
-    lines.push('start --> trig');
-    lines.push('trig>Trigger]:::trigger');
+    lines.push('start --> trig[Trigger]:::trigger');
+    lines.push('trig --> cond');
   } else {
     lines.push('start --> cond');
   }
 
-  if (t.length) lines.push('trig --> cond');
   if (c.length) {
     lines.push('cond{Condition}:::condition');
+    lines.push('cond -->|true| act[Action]:::action');
   } else {
-    lines.push('cond --> act');
+    lines.push('cond --> act[Action]:::action');
   }
 
-  if (c.length) lines.push('cond -->|true| act');
-  lines.push('act>Action]:::action');
   lines.push('act --> end([End])');
 
   return lines.join('\n');
