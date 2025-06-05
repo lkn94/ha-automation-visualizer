@@ -24,21 +24,25 @@ export default function AutomationViewer({ info, onBack }: Props) {
     <div className="space-y-4">
       <button onClick={onBack} className="underline">Zurück</button>
       <h2 className="text-xl font-bold">{info.title}</h2>
-      {info.description && (
-        <p className="opacity-80">{info.description}</p>
-      )}
-      {info.affiliate && (
-        <p>
-          <a
-            href={info.affiliate}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline text-blue-600"
-          >
-            Jetzt Produkt entdecken
-          </a>
-          *
-        </p>
+      {(info.description || info.affiliate) && (
+        <div className="md:flex md:items-center md:justify-between">
+          {info.description && (
+            <p className="opacity-80">{info.description}</p>
+          )}
+          {info.affiliate && (
+            <p className="mt-2 md:mt-0 md:ml-4">
+              <a
+                href={info.affiliate}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              >
+                Jetzt Produkt entdecken
+              </a>
+              <span className="ml-1">*</span>
+            </p>
+          )}
+        </div>
       )}
       <pre className="bg-gray-200 dark:bg-gray-800 p-4 overflow-auto">
         <code>{yamlText}</code>

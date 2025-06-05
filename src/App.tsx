@@ -29,7 +29,7 @@ export default function App() {
       )}
       <footer className="text-sm mt-8 border-t pt-4 text-center opacity-80">
         Beim mit * gekennzeichneten Link handelt es sich um einen Affiliate-Link.
-        Ich erhalte eine Provision, für Sie entstehen keine Mehrkosten.
+        Ich erhalte eine Provision, für Dich entstehen keine Mehrkosten.
       </footer>
     </div>
   );
