@@ -28,7 +28,13 @@ function summarizeTrigger(t: unknown): string {
 
 function summarizeCondition(c: unknown): string {
   if (c && typeof c === 'object' && 'condition' in (c as any)) {
-    return String((c as any).condition)
+    const obj = c as Record<string, unknown>
+    const type = String(obj.condition)
+    const details = Object.entries(obj)
+      .filter(([k]) => k !== 'condition')
+      .map(([k, v]) => `${k}=${v}`)
+      .join('\n')
+    return details ? `${type}\n${details}` : type
   }
   return JSON.stringify(c)
 }
