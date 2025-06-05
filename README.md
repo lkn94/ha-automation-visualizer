@@ -23,6 +23,10 @@ npm run dev
    ```bash
    npm run deploy
    ```
+3. Teste das gebaute Projekt lokal, um sicherzustellen, dass alle Pfade korrekt sind:
+   ```bash
+   npx serve dist
+   ```
 
 GitHub Pages kann anschließend aus dem Branch `gh-pages` die statische Seite
 hosten.
