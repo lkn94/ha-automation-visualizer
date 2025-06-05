@@ -34,7 +34,7 @@ export function automationToMermaid(a: Automation): string {
     lines.push('cond --> act[Action]:::action');
   }
 
-  lines.push('act --> end([End])');
+  lines.push('act --> finish([End])');
 
   return lines.join('\n');
 }
