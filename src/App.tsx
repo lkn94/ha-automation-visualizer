@@ -39,6 +39,14 @@ export default function App() {
       <footer className="text-sm mt-8 border-t border-yellow-600 pt-4 text-center opacity-80">
         Beim mit * gekennzeichneten Link handelt es sich um einen Affiliate-Link.
         Ich erhalte eine Provision, für Dich entstehen keine Mehrkosten.
+        <br />
+        <a
+          href="https://hobbyblogging.de/impressum"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Impressum
+        </a>
       </footer>
     </div>
   );
