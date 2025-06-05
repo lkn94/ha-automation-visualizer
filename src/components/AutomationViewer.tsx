@@ -27,6 +27,19 @@ export default function AutomationViewer({ info, onBack }: Props) {
       {info.description && (
         <p className="opacity-80">{info.description}</p>
       )}
+      {info.affiliate && (
+        <p>
+          <a
+            href={info.affiliate}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-600"
+          >
+            Jetzt Produkt entdecken
+          </a>
+          *
+        </p>
+      )}
       <pre className="bg-gray-200 dark:bg-gray-800 p-4 overflow-auto">
         <code>{yamlText}</code>
       </pre>
