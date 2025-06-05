@@ -37,11 +37,39 @@ function summarizeAction(a: unknown): string {
   if (a && typeof a === 'object') {
     const obj = a as Record<string, unknown>
     if ('service' in obj) {
-      return String(obj.service)
+      let label = String(obj.service)
+      if (typeof obj.target === 'object') {
+        const target = Object.entries(obj.target as Record<string, unknown>)
+          .map(([k, v]) => `${k}=${v}`)
+          .join(', ')
+        if (target) label += `\n${target}`
+      }
+      if (typeof obj.data === 'object') {
+        const data = Object.entries(obj.data as Record<string, unknown>)
+          .map(([k, v]) => `${k}=${v}`)
+          .join(', ')
+        if (data) label += `\n${data}`
+      }
+      return label
     }
     if ('choose' in obj) {
-      const opts = Array.isArray(obj.choose) ? obj.choose.length : 1
-      return `choose (${opts})`
+      const choices = Array.isArray(obj.choose) ? obj.choose : []
+      const lines: string[] = ['choose']
+      choices.forEach((ch, idx) => {
+        const c = (ch as any).conditions ?? []
+        const cond = c.map(summarizeCondition).join(' && ')
+        const seq = ((ch as any).sequence ?? [])
+          .map((act: unknown) => summarizeAction(act))
+          .join(' -> ')
+        lines.push(`${idx + 1}: ${cond} => ${seq}`)
+      })
+      if (Array.isArray(obj.default)) {
+        const seq = obj.default
+          .map((act: unknown) => summarizeAction(act))
+          .join(' -> ')
+        lines.push(`default => ${seq}`)
+      }
+      return lines.join('\n')
     }
   }
   return JSON.stringify(a)
