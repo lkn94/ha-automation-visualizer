@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import DiagramRenderer from './DiagramRenderer';
-import { AutomationInfo } from './AutomationList';
-import { automationToMermaid, parseAutomation } from '../utils/parseYaml';
+import { useEffect, useState } from 'react'
+import DiagramRenderer from './DiagramRenderer'
+import { AutomationInfo } from './AutomationList'
+import { automationToMermaid, parseAutomation } from '../utils/parseYaml'
 
 interface Props {
   info: AutomationInfo;
@@ -9,8 +9,7 @@ interface Props {
 }
 
 export default function AutomationViewer({ info, onBack }: Props) {
-  const [yamlText, setYamlText] = useState('');
-  const [showYaml, setShowYaml] = useState(false);
+  const [yamlText, setYamlText] = useState('')
 
   useEffect(() => {
     fetch(`automations/${info.file}`)
@@ -25,15 +24,13 @@ export default function AutomationViewer({ info, onBack }: Props) {
     <div className="space-y-4">
       <button onClick={onBack} className="underline">Zurück</button>
       <h2 className="text-xl font-bold">{info.title}</h2>
-      <DiagramRenderer definition={mermaidDef} />
-      <button onClick={() => setShowYaml((v) => !v)} className="underline">
-        YAML {showYaml ? 'ausblenden' : 'anzeigen'}
-      </button>
-      {showYaml && (
-        <pre className="bg-gray-200 dark:bg-gray-800 p-4 overflow-auto">
-          <code>{yamlText}</code>
-        </pre>
+      {info.description && (
+        <p className="opacity-80">{info.description}</p>
       )}
+      <pre className="bg-gray-200 dark:bg-gray-800 p-4 overflow-auto">
+        <code>{yamlText}</code>
+      </pre>
+      <DiagramRenderer definition={mermaidDef} />
     </div>
-  );
+  )
 }
