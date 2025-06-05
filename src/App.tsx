@@ -1,10 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AutomationList, { AutomationInfo } from './components/AutomationList';
 import AutomationViewer from './components/AutomationViewer';
 import './App.css';
 
 export default function App() {
   const [selected, setSelected] = useState<AutomationInfo | null>(null);
+
+  useEffect(() => {
+    const loadFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get('automation');
+      if (file) {
+        fetch('automations/automations.json')
+          .then((res) => res.json())
+          .then((data) => {
+            const found = data.find((item: AutomationInfo) => item.file === file);
+            if (found) {
+              const [category = 'Sonstiges'] = found.file.split('_');
+              setSelected({ ...found, category });
+            }
+          });
+      } else {
+        setSelected(null);
+      }
+    };
+
+    loadFromUrl();
+    window.addEventListener('popstate', loadFromUrl);
+    return () => window.removeEventListener('popstate', loadFromUrl);
+  }, []);
+
+  const handleSelect = (info: AutomationInfo) => {
+    setSelected(info);
+    const params = new URLSearchParams();
+    params.set('automation', info.file);
+    window.history.pushState({}, '', `${window.location.pathname}?${params}`);
+  };
+
+  const handleBack = () => {
+    setSelected(null);
+    window.history.pushState({}, '', window.location.pathname);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -26,13 +62,13 @@ export default function App() {
         <div
           className={`transition-opacity duration-500 ${selected ? 'opacity-0 pointer-events-none absolute inset-0' : 'opacity-100'}`}
         >
-          <AutomationList onSelect={setSelected} />
+          <AutomationList onSelect={handleSelect} />
         </div>
         <div
           className={`transition-opacity duration-500 ${selected ? 'opacity-100' : 'opacity-0 pointer-events-none absolute inset-0'}`}
         >
           {selected && (
-            <AutomationViewer info={selected} onBack={() => setSelected(null)} />
+            <AutomationViewer info={selected} onBack={handleBack} />
           )}
         </div>
       </div>
