@@ -1,7 +1,12 @@
 [
   {
-    "file": "licht_abends.yaml",
+    "file": "Homeoffice_licht_abends.yaml",
     "title": "Licht Abends",
     "description": "Schaltet das Licht bei Sonnenuntergang ein"
+  },
+  {
+    "file": "Garten_bewaesserung.yaml",
+    "title": "Garten Bewässerung",
+    "description": "Startet die Bewässerung am Morgen"
   }
 ]

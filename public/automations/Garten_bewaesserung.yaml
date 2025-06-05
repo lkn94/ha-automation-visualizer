@@ -1,0 +1,9 @@
+alias: "Bewässerung morgens"
+description: "Startet die Bewässerung am Morgen"
+trigger:
+  - platform: time
+    at: "06:00:00"
+action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.garten_bewaesserung
