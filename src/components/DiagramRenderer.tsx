@@ -11,9 +11,12 @@ export default function DiagramRenderer({ definition }: Props) {
   useEffect(() => {
     if (!ref.current) return;
     mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
-    mermaid.render('diagram', definition).then(({ svg }) => {
-      if (ref.current) ref.current.innerHTML = svg;
-    });
+    const id = `diagram-${Math.random().toString(36).slice(2)}`;
+    mermaid
+      .render(id, definition, ref.current)
+      .catch((err) => {
+        console.error(err);
+      });
   }, [definition]);
 
   return <div ref={ref} className="mermaid" />;
