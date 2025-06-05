@@ -89,7 +89,7 @@ export function automationToMermaid(a: Automation): string {
   const t = a.trigger ?? []
   const c = a.condition ?? []
   const act = a.action ?? []
-  const lines: string[] = ['flowchart TD']
+  const lines: string[] = ['flowchart LR']
 
   lines.push('classDef trigger fill:#FEF3C7')
   lines.push('classDef condition fill:#DBEAFE')
