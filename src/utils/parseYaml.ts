@@ -34,8 +34,15 @@ function summarizeCondition(c: unknown): string {
 }
 
 function summarizeAction(a: unknown): string {
-  if (a && typeof a === 'object' && 'service' in (a as any)) {
-    return String((a as any).service)
+  if (a && typeof a === 'object') {
+    const obj = a as Record<string, unknown>
+    if ('service' in obj) {
+      return String(obj.service)
+    }
+    if ('choose' in obj) {
+      const opts = Array.isArray(obj.choose) ? obj.choose.length : 1
+      return `choose (${opts})`
+    }
   }
   return JSON.stringify(a)
 }
@@ -46,6 +53,8 @@ function esc(text: string): string {
     .replace(/"/g, '\\"')
     .replace(/\[/g, '\\[')
     .replace(/\]/g, '\\]')
+    .replace(/\{/g, '\\{')
+    .replace(/\}/g, '\\}')
 }
 
 export function automationToMermaid(a: Automation): string {
