@@ -10,7 +10,11 @@ export default function DiagramRenderer({ definition }: Props) {
 
   useEffect(() => {
     if (!ref.current) return;
-    mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'neutral',
+      flowchart: { wrap: true },
+    });
     const id = `diagram-${Math.random().toString(36).slice(2)}`;
     mermaid
       .render(id, definition)
@@ -25,5 +29,5 @@ export default function DiagramRenderer({ definition }: Props) {
       });
   }, [definition]);
 
-  return <div ref={ref} className="mermaid" />;
+  return <div ref={ref} className="mermaid overflow-x-auto" />;
 }
