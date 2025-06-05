@@ -29,5 +29,7 @@ export default function DiagramRenderer({ definition }: Props) {
       });
   }, [definition]);
 
-  return <div ref={ref} className="mermaid overflow-x-auto" />;
+  return (
+    <div ref={ref} className="mermaid overflow-x-auto flex justify-center" />
+  );
 }
