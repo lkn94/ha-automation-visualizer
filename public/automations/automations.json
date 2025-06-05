@@ -8,5 +8,10 @@
     "file": "Garten_bewaesserung.yaml",
     "title": "Garten Bewässerung",
     "description": "Startet die Bewässerung am Morgen"
+  },
+  {
+    "file": "Haushalt_saugroboter.yaml",
+    "title": "Saugroboter bei Abwesenheit",
+    "description": "Startet automatisch, wenn niemand zuhause ist"
   }
 ]
