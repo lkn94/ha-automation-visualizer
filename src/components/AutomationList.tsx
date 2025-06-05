@@ -43,7 +43,7 @@ export default function AutomationList({ onSelect }: Props) {
             {items.map((item) => (
               <li
                 key={item.file}
-                className="p-4 border rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="p-4 border border-blue-800 rounded cursor-pointer hover:bg-blue-800 hover:border-yellow-500 transition-colors"
                 onClick={() => onSelect(item)}
               >
                 <h3 className="text-lg font-medium">{item.title}</h3>
