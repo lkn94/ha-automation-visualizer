@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mermaid .trigger rect {
+  fill: #86efac;
+}
+.mermaid .condition rect {
+  fill: #facc15;
+}
+.mermaid .action rect {
+  fill: #93c5fd;
+}
