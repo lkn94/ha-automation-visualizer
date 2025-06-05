@@ -9,7 +9,8 @@ export interface Automation {
 }
 
 export function parseAutomation(content: string): Automation {
-  return yaml.load(content) as Automation;
+  const data = yaml.load(content) as Automation | undefined;
+  return data ?? {};
 }
 
 export function automationToMermaid(a: Automation): string {
