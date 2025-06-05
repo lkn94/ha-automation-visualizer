@@ -1,0 +1,10 @@
+alias: "Licht abends einschalten"
+description: "Schaltet das Licht bei Sonnenuntergang ein"
+trigger:
+  - platform: sun
+    event: sunset
+condition: []
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.wohnzimmer
