@@ -45,15 +45,20 @@ export default function AutomationList({ onSelect }: Props) {
           <h2 className="text-xl font-semibold mb-2">{cat}</h2>
           <ul className="space-y-2">
             {items.map((item) => (
-              <li
-                key={item.file}
-                className="p-4 border border-blue-800 rounded cursor-pointer hover:bg-blue-900 hover:border-yellow-500 transition-colors"
-                onClick={() => onSelect(item)}
-              >
-                <h3 className="text-lg font-medium">{item.title}</h3>
-                {item.description && (
-                  <p className="text-sm opacity-80">{item.description}</p>
-                )}
+              <li key={item.file}>
+                <a
+                  href={`?automation=${encodeURIComponent(item.file)}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelect(item);
+                  }}
+                  className="block p-4 border border-blue-800 rounded cursor-pointer hover:bg-blue-900 hover:border-yellow-500 transition-colors no-underline"
+                >
+                  <h3 className="text-lg font-medium">{item.title}</h3>
+                  {item.description && (
+                    <p className="text-sm opacity-80">{item.description}</p>
+                  )}
+                </a>
               </li>
             ))}
           </ul>
