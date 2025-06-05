@@ -35,7 +35,11 @@ export default function AutomationList({ onSelect }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Automationen</h1>
+      <h1 className="text-2xl font-bold mb-2">Automationen</h1>
+      <p className="mb-4 opacity-90">
+        Hier findest du YAML-Automationen aus Home Assistant, die anschaulich
+        visualisiert werden.
+      </p>
       {Object.entries(groups).map(([cat, items]) => (
         <div key={cat} className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{cat}</h2>

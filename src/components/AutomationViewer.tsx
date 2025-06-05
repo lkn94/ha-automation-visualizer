@@ -43,7 +43,7 @@ export default function AutomationViewer({ info, onBack }: Props) {
                 href={info.affiliate}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-yellow-500 text-blue-900 px-4 py-2 rounded-md hover:bg-yellow-400"
+                className="inline-block bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400"
               >
                 Jetzt Produkt entdecken
               </a>
