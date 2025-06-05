@@ -52,7 +52,7 @@ export default function AutomationViewer({ info, onBack }: Props) {
           )}
         </div>
       )}
-      <pre className="bg-gray-200 dark:bg-gray-800 p-4 overflow-auto">
+      <pre className="bg-black text-white p-4 overflow-auto">
         <code>{yamlText}</code>
       </pre>
       <DiagramRenderer definition={mermaidDef} />

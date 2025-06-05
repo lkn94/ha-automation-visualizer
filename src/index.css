@@ -11,3 +11,9 @@
 .mermaid .action rect {
   fill: #93c5fd;
 }
+
+/* Allow diagrams to be larger than the screen width so they don't shrink on
+   mobile devices. */
+.mermaid svg {
+  max-width: none;
+}
