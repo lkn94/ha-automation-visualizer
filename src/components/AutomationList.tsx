@@ -4,6 +4,7 @@ export interface AutomationInfo {
   file: string;
   title: string;
   description?: string;
+  affiliate?: string;
   category: string;
 }
 

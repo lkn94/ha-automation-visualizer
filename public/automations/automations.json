@@ -2,16 +2,19 @@
   {
     "file": "Homeoffice_licht_abends.yaml",
     "title": "Licht Abends",
-    "description": "Schaltet das Licht bei Sonnenuntergang ein"
+    "description": "Schaltet das Licht bei Sonnenuntergang ein",
+    "affiliate": "https://google.com"
   },
   {
     "file": "Garten_bewaesserung.yaml",
     "title": "Garten Bewässerung",
-    "description": "Startet die Bewässerung am Morgen"
+    "description": "Startet die Bewässerung am Morgen",
+    "affiliate": "https://google.com"
   },
   {
     "file": "Haushalt_saugroboter.yaml",
     "title": "Saugroboter bei Abwesenheit",
-    "description": "Startet automatisch, wenn niemand zuhause ist"
+    "description": "Startet automatisch, wenn niemand zuhause ist",
+    "affiliate": "https://google.com"
   }
 ]
