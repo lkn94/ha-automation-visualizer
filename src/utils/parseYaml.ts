@@ -41,7 +41,11 @@ function summarizeAction(a: unknown): string {
 }
 
 function esc(text: string): string {
-  return text.replace(/"/g, '\\"')
+  return text
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/\[/g, '\\[')
+    .replace(/\]/g, '\\]')
 }
 
 export function automationToMermaid(a: Automation): string {
