@@ -32,25 +32,8 @@ export default function AutomationViewer({ info, onBack }: Props) {
         </button>
         <h2 className="text-xl font-bold">{info.title}</h2>
       </div>
-      {(info.description || info.affiliate) && (
-        <div className="md:flex md:items-center md:justify-between">
-          {info.description && (
-            <p className="opacity-80">{info.description}</p>
-          )}
-          {info.affiliate && (
-            <p className="mt-2 md:mt-0 md:ml-4">
-              <a
-                href={info.affiliate}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-400"
-              >
-                Jetzt Produkt entdecken
-              </a>
-              <span className="ml-1">*</span>
-            </p>
-          )}
-        </div>
+      {info.description && (
+        <p className="opacity-80">{info.description}</p>
       )}
       <pre className="bg-black text-white p-4 overflow-auto">
         <code>{yamlText}</code>
