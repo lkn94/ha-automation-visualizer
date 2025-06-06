@@ -3,5 +3,10 @@
     "file": "Beleuchtung_Aqara-FP2.yaml",
     "title": "Licht Abends",
     "description": "Automation zur Nutzung einer automatischen Beleuchtung basierend auf Helligkeits- und Präsenzwerten durch u. a. einen Aqara FP2."
+  },
+  {
+    "file": "Haushalt_Waschmaschine-fertig.yaml",
+    "title": "Waschmaschine fertig",
+    "description": "Automation zur Benachrichtigung darüber, dass die Waschmaschine ihre Aufgabe erledigt hat und fertig ist."
   }
 ]
