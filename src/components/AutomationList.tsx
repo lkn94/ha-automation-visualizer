@@ -28,10 +28,14 @@ export default function AutomationList({ onSelect }: Props) {
   }, []);
 
   const groups = list.reduce<Record<string, AutomationInfo[]>>((acc, item) => {
-    acc[item.category] = acc[item.category] || [];
-    acc[item.category].push(item);
-    return acc;
-  }, {});
+    acc[item.category] = acc[item.category] || []
+    acc[item.category].push(item)
+    return acc
+  }, {})
+
+  const categories = Object.keys(groups).sort((a, b) =>
+    a.localeCompare(b, 'de', { sensitivity: 'base' })
+  )
 
   return (
     <div>
@@ -40,11 +44,16 @@ export default function AutomationList({ onSelect }: Props) {
         Hier findest du YAML-Automationen aus Home Assistant, die anschaulich
         visualisiert werden.
       </p>
-      {Object.entries(groups).map(([cat, items]) => (
+      {categories.map((cat) => (
         <div key={cat} className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{cat}</h2>
           <ul className="space-y-2">
-            {items.map((item) => (
+            {groups[cat]
+              .slice()
+              .sort((a, b) =>
+                a.title.localeCompare(b.title, 'de', { sensitivity: 'base' })
+              )
+              .map((item) => (
               <li key={item.file}>
                 <a
                   href={`?automation=${encodeURIComponent(item.file)}`}
@@ -60,7 +69,7 @@ export default function AutomationList({ onSelect }: Props) {
                   )}
                 </a>
               </li>
-            ))}
+              ))}
           </ul>
         </div>
       ))}
