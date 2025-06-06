@@ -92,6 +92,23 @@ function summarizeAction(a: unknown): string {
       }
       return label
     }
+    if ('delay' in obj) {
+      const d = obj.delay as Record<string, unknown>
+      if (typeof d === 'object' && d) {
+        const parts: string[] = []
+        const h = d.hours as number | undefined
+        const m = d.minutes as number | undefined
+        const s = d.seconds as number | undefined
+        const ms = d.milliseconds as number | undefined
+        if (h) parts.push(`${h}h`)
+        if (m) parts.push(`${m}m`)
+        if (s) parts.push(`${s}s`)
+        if (ms) parts.push(`${ms}ms`)
+        const time = parts.join(' ')
+        return time ? `delay ${time}` : 'delay'
+      }
+      return `delay ${obj.delay}`
+    }
     if ('choose' in obj) {
       const choices = Array.isArray(obj.choose) ? obj.choose : []
       const lines: string[] = ['choose']
@@ -119,6 +136,7 @@ function esc(text: string): string {
   return text
     .replace(/\\/g, '\\\\')
     .replace(/"/g, '\\"')
+    .replace(/\n/g, '<br/>')
     .replace(/\[/g, '\\[')
     .replace(/\]/g, '\\]')
     .replace(/\{/g, '\\{')
