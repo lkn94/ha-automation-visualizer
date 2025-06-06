@@ -1,0 +1,20 @@
+alias: Kaffeeerinnerung
+description: ""
+triggers:
+  - trigger: tag
+    tag_id: 386d74c2-13dd-4aaf-b03d-c2a756e1bf56
+conditions: []
+actions:
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - action: script.benachrichtigung
+    metadata: {}
+    data:
+      an_sprachassistenten_senden: true
+      immer_per_pushnachricht_senden: false
+      an_lametric_senden: true
+      benachrichtigungstext: Du hast deinen Kaffee vergessen!
+mode: single

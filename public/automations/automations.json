@@ -1,12 +1,27 @@
 [
   {
     "file": "Beleuchtung_Aqara-FP2.yaml",
-    "title": "Licht Abends",
+    "title": "Automatische Beleuchtung",
     "description": "Automation zur Nutzung einer automatischen Beleuchtung basierend auf Helligkeits- und Präsenzwerten durch u. a. einen Aqara FP2."
   },
   {
     "file": "Haushalt_Waschmaschine-fertig.yaml",
     "title": "Waschmaschine fertig",
     "description": "Automation zur Benachrichtigung darüber, dass die Waschmaschine ihre Aufgabe erledigt hat und fertig ist."
+  },
+  {
+    "file": "Alltag_Kaffee-fertig.yaml",
+    "title": "Kaffee fertig",
+    "description": "Eine Automation für einen NFC-Tag, der einen Timer stellt und eine Benachrichtigung versendet (weil ich den Kaffee zu oft vergessen habe)."
+  },
+  {
+    "file": "Raumklima_Lüftersteuerung.yaml",
+    "title": "Lüftersteuerung",
+    "description": "Die Automatisierung eines Lüfters im Badezimmer bei selbst gemessenen Feuchtigkeitswerten."
+  },
+  {
+    "file": "Beleuchtung_Flurbeleuchtung.yaml",
+    "title": "Flurbeleuchtung",
+    "description": "Eine automatische Flurbeleuchtung basierend auf der Helligkeit und Bewegungsmeldern."
   }
 ]

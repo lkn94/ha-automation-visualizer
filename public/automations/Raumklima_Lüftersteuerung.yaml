@@ -1,0 +1,30 @@
+alias: Badezimmer Lüfter
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.smart_temp_humidity_sensor_39000dd28397_humidity
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: numeric_state
+            entity_id: sensor.smart_temp_humidity_sensor_39000dd28397_humidity
+            above: 78
+        sequence:
+          - action: light.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: light.lufter
+      - conditions:
+          - condition: numeric_state
+            entity_id: sensor.smart_temp_humidity_sensor_39000dd28397_humidity
+            below: 72
+        sequence:
+          - action: light.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: light.lufter
+mode: single
