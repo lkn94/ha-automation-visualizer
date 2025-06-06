@@ -1,0 +1,24 @@
+alias: Waschmaschine fertig
+description: Sendet eine Benachrichtigung, wenn die Waschmaschine fertig ist.
+triggers:
+  - type: power
+    device_id: 0c97b5e2ad669d60d25a8d424e7fa3af
+    entity_id: 36c2b9769a16172d18bda55287fa493e
+    domain: sensor
+    below: 2
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+    above: 0
+    trigger: device
+conditions: []
+actions:
+  - action: script.benachrichtigung
+    metadata: {}
+    data:
+      an_sprachassistenten_senden: true
+      immer_per_pushnachricht_senden: false
+      an_lametric_senden: true
+      benachrichtigungstext: Die Waschmaschine ist fertig.
+mode: single
