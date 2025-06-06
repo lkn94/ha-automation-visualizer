@@ -1,0 +1,48 @@
+alias: Beleuchtung Arbeitszimmer
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.presence_sensor_fp2_963d_presence_sensor_1
+  - trigger: numeric_state
+    entity_id:
+      - sensor.presence_sensor_fp2_963d_light_sensor_light_level
+    below: 30
+  - trigger: numeric_state
+    entity_id:
+      - sensor.presence_sensor_fp2_963d_light_sensor_light_level
+    above: 80
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.presence_sensor_fp2_963d_presence_sensor_1
+                state: "on"
+              - condition: numeric_state
+                entity_id: sensor.presence_sensor_fp2_963d_light_sensor_light_level
+                below: 30
+        sequence:
+          - action: scene.turn_on
+            metadata: {}
+            target:
+              entity_id: scene.og_arbeitszimmer_chinatown
+            data: {}
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.presence_sensor_fp2_963d_presence_sensor_1
+                state: "off"
+              - condition: numeric_state
+                entity_id: sensor.presence_sensor_fp2_963d_light_sensor_light_level
+                above: 80
+        sequence:
+          - action: light.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: light.og_arbeitszimmer
+mode: single
