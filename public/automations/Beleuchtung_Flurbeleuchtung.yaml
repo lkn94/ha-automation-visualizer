@@ -1,0 +1,106 @@
+alias: Beleuchtung Flur
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.aussenflur_bewegungsmelder_1_bewegung
+      - binary_sensor.innenflur_bewegungsmelder_1_bewegung
+      - binary_sensor.innenflur_bewegungsmelder_2_bewegung
+    to: "on"
+    from: "off"
+conditions:
+  - condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.wetterstation_beleuchtungsstarke
+        below: 300
+      - condition: time
+        after: "06:00:00"
+        before: "22:00:00"
+actions:
+  - choose:
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.aussenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_2_bewegung
+                state: "on"
+          - condition: state
+            entity_id: sensor.season
+            state: spring
+        sequence:
+          - action: scene.turn_on
+            metadata: {}
+            target:
+              entity_id: scene.og_flur_fruhling
+            data: {}
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.aussenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_2_bewegung
+                state: "on"
+          - condition: state
+            entity_id: sensor.season
+            state: summer
+        sequence:
+          - action: scene.turn_on
+            metadata: {}
+            target:
+              entity_id: scene.og_flur_sonnenuntergang_savanne
+            data: {}
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.aussenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_2_bewegung
+                state: "on"
+          - condition: state
+            entity_id: sensor.season
+            state: autumn
+        sequence:
+          - action: scene.turn_on
+            metadata: {}
+            target:
+              entity_id: scene.og_flur_herbst
+            data: {}
+      - conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.aussenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_1_bewegung
+                state: "on"
+              - condition: state
+                entity_id: binary_sensor.innenflur_bewegungsmelder_2_bewegung
+                state: "on"
+          - condition: state
+            entity_id: sensor.season
+            state: winter
+        sequence:
+          - action: scene.turn_on
+            metadata: {}
+            target:
+              entity_id: scene.og_flur_winter
+            data: {}
+mode: single
