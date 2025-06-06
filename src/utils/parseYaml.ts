@@ -54,10 +54,19 @@ function summarizeCondition(c: unknown): string {
   if (c && typeof c === 'object' && 'condition' in (c as any)) {
     const obj = c as Record<string, unknown>
     const type = String(obj.condition)
-    const details = Object.entries(obj)
-      .filter(([k]) => k !== 'condition')
-      .map(([k, v]) => `${k}=${v}`)
-      .join('\n')
+    const lines: string[] = []
+    Object.entries(obj).forEach(([k, v]) => {
+      if (k === 'condition') return
+      if (k === 'conditions' && Array.isArray(v)) {
+        const conds = v.map(summarizeCondition).join(' && ')
+        if (conds) lines.push(conds)
+      } else if (typeof v === 'object') {
+        lines.push(`${k}=${JSON.stringify(v)}`)
+      } else {
+        lines.push(`${k}=${v}`)
+      }
+    })
+    const details = lines.join('\n')
     return details ? `${type}\n${details}` : type
   }
   return JSON.stringify(c)
