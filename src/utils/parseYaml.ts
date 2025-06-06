@@ -9,19 +9,43 @@ export interface Automation {
 }
 
 export function parseAutomation(content: string): Automation {
-  const data = yaml.load(content) as Automation | undefined
-  return data ?? {}
+  const data = yaml.load(content) as Record<string, unknown> | undefined
+  if (!data) return {}
+
+  const automation: Automation = {}
+  if (typeof data.alias === 'string') automation.alias = data.alias
+  if (typeof data.description === 'string') automation.description = data.description
+
+  const trig =
+    (data.trigger as unknown) ??
+    (data.triggers as unknown)
+  if (trig !== undefined) automation.trigger = Array.isArray(trig) ? trig : [trig]
+
+  const cond =
+    (data.condition as unknown) ??
+    (data.conditions as unknown)
+  if (cond !== undefined) automation.condition = Array.isArray(cond) ? cond : [cond]
+
+  const act =
+    (data.action as unknown) ??
+    (data.actions as unknown)
+  if (act !== undefined) automation.action = Array.isArray(act) ? act : [act]
+
+  return automation
 }
 
 function summarizeTrigger(t: unknown): string {
-  if (t && typeof t === 'object' && 'platform' in (t as any)) {
+  if (t && typeof t === 'object') {
     const obj = t as Record<string, unknown>
-    const platform = String(obj.platform)
-    const details = Object.entries(obj)
-      .filter(([k]) => k !== 'platform')
-      .map(([k, v]) => `${k}=${v}`)
-      .join(', ')
-    return details ? `${platform} ${details}` : platform
+    const platform = obj.platform ?? obj.trigger ?? obj.type
+    if (platform) {
+      const details = Object.entries(obj)
+        .filter(([k]) => k !== 'platform' && k !== 'trigger' && k !== 'type')
+        .map(([k, v]) => `${k}=${v}`)
+        .join(', ')
+      const name = String(platform)
+      return details ? `${name} ${details}` : name
+    }
   }
   return JSON.stringify(t)
 }
@@ -42,8 +66,9 @@ function summarizeCondition(c: unknown): string {
 function summarizeAction(a: unknown): string {
   if (a && typeof a === 'object') {
     const obj = a as Record<string, unknown>
-    if ('service' in obj) {
-      let label = String(obj.service)
+    const service = obj.service ?? obj.action
+    if (service) {
+      let label = String(service)
       if (typeof obj.target === 'object') {
         const target = Object.entries(obj.target as Record<string, unknown>)
           .map(([k, v]) => `${k}=${v}`)
@@ -92,9 +117,18 @@ function esc(text: string): string {
 }
 
 export function automationToMermaid(a: Automation): string {
-  const t = a.trigger ?? []
-  const c = a.condition ?? []
-  const act = a.action ?? []
+  const t =
+    (a.trigger as unknown[] | undefined) ??
+    ((a as any).triggers as unknown[] | undefined) ??
+    []
+  const c =
+    (a.condition as unknown[] | undefined) ??
+    ((a as any).conditions as unknown[] | undefined) ??
+    []
+  const act =
+    (a.action as unknown[] | undefined) ??
+    ((a as any).actions as unknown[] | undefined) ??
+    []
   const lines: string[] = ['flowchart TD']
 
   lines.push('classDef trigger fill:#FEF3C7')
