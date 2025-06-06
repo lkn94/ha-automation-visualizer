@@ -1,20 +1,7 @@
 [
   {
-    "file": "Homeoffice_licht_abends.yaml",
+    "file": "Beleuchtung_Aqara-FP2.yaml",
     "title": "Licht Abends",
-    "description": "Schaltet das Licht bei Sonnenuntergang ein",
-    "affiliate": "https://google.com"
-  },
-  {
-    "file": "Garten_bewaesserung.yaml",
-    "title": "Garten Bewässerung",
-    "description": "Startet die Bewässerung am Morgen",
-    "affiliate": "https://google.com"
-  },
-  {
-    "file": "Haushalt_saugroboter.yaml",
-    "title": "Saugroboter bei Abwesenheit",
-    "description": "Startet automatisch, wenn niemand zuhause ist",
-    "affiliate": "https://google.com"
+    "description": "Automation zur Nutzung einer automatischen Beleuchtung basierend auf Helligkeits- und Präsenzwerten durch u. a. einen Aqara FP2."
   }
 ]
