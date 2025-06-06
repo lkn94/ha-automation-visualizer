@@ -13,5 +13,10 @@
     "file": "Alltag_Kaffee-fertig.yaml",
     "title": "Kaffee fertig",
     "description": "Eine Automation für einen NFC-Tag, der einen Timer stellt und eine Benachrichtigung versendet (weil ich den Kaffee zu oft vergessen habe)."
+  },
+  {
+    "file": "Raumklima_Lüftersteuerung.yaml",
+    "title": "Lüftersteuerung",
+    "description": "Die Automatisierung eines Lüfters im Badezimmer bei selbst gemessenen Feuchtigkeitswerten."
   }
 ]
